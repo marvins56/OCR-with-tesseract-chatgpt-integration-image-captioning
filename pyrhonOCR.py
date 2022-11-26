@@ -4,6 +4,7 @@ import pytesseract
 from gtts import gTTS
 from playsound import playsound
 
+
 # Connects pytesseract(wrapper) to the trained tesseract module
 pytesseract.pytesseract.tesseract_cmd = 'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
 
@@ -48,6 +49,8 @@ img1 = cv2.imread('Capture_1.JPG')
 img2 = cv2.imread('Capture_2.JPG')
 img3 = cv2.imread('Capture_3.JPG')
 img4 = cv2.imread('img4.png')
+img5 = cv2.imread('img.png')
+
 
 # # Obtains only the string from images without visual feedback
 # print(pytesseract.image_to_string(img1))
@@ -59,7 +62,7 @@ img4 = cv2.imread('img4.png')
 h1Img, w1Img, none1 = img1.shape
 h2Img, w2Img, none2 = img2.shape
 h3Img, w3Img, none3 = img3.shape
-h4Img, w4Img, none3 = img4.shape
+h4Img, w4Img, none4 = img4.shape
 
 
 
@@ -71,6 +74,8 @@ box1 = pytesseract.image_to_boxes(img1)
 box2 = pytesseract.image_to_boxes(img2)
 box3 = pytesseract.image_to_boxes(img3)
 box4 = pytesseract.image_to_boxes(img4)
+box5 = pytesseract.image_to_boxes(img5)
+
 
 
 # Convert images into bound data values: level, page no, block no, paragraph no,
@@ -81,6 +86,7 @@ data1 = pytesseract.image_to_data(img1)
 data2 = pytesseract.image_to_data(img2)
 data3 = pytesseract.image_to_data(img3)
 data4 = pytesseract.image_to_data(img4)
+data5 = pytesseract.image_to_data(img5)
 #
 # for z, a in enumerate(data1.splitlines()):
 #     if z!= 0:
@@ -165,20 +171,20 @@ data4 = pytesseract.image_to_data(img4)
 # TTS
 # Open the file with write permission
 filewrite = open("String.txt", "w")
-for z, a in enumerate(data1.splitlines()):
+for z, a in enumerate(data5.splitlines()):
     # Counter
     if z != 0:
         # Converts 'data1' string into a list stored in 'a'
         a = a.split()
         # Checking if array contains a word
-        if len(a) == 12:
+        if len(a) >= 12:
             # Storing values in the right variables
             x, y = int(a[6]), int(a[7])
             w, h = int(a[8]), int(a[9])
             # Display bounding box of each word
-            cv2.rectangle(img4, (x, y), (x + w, y + h), (0, 0, 255), 1)
+            cv2.rectangle(img5, (x, y), (x + w, y + h), (0, 0, 255), 1)
             # Display detected word under each bounding box
-            cv2.putText(img4, a[11], (x - 15, y), cv2.FONT_HERSHEY_PLAIN, 2, (0, 0, 255), 1)
+            cv2.putText(img5, a[11], (x - 15, y), cv2.FONT_HERSHEY_PLAIN, 2, (0, 0, 255), 1)
             # Writing to the file
             filewrite.write(a[11] + " ")
 filewrite.close()
@@ -189,8 +195,8 @@ line = fileread.read()
 if line != " ":
     fileread.close()
     speech = gTTS(text=line, lang=language, slow=False)
-    speech.save("test.mp3")
+    speech.save("audio.mp3")
 # Output the bounding box with the image before audio file
-cv2.imshow('Image output', img4)
+cv2.imshow('Image output', img5)
 cv2.waitKey(0)
-playsound("test.mp3")
+playsound("audio.mp3")
