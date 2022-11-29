@@ -162,7 +162,8 @@ def wordthree():
 
 def startvideofeed():
     # Video feed
-    video = cv2.VideoCapture("https://10.4.183.8:8080/video")
+    video = cv2.VideoCapture("rtsp://172.20.10.11")
+
 
     # Setting width and height for video feed
     video.set(3, 640)
@@ -171,7 +172,7 @@ def startvideofeed():
     # Allows continuous frames
     while True:
         # Capture each frame from the video feed
-        extra, frames = video.read()
+        ret, frames = video.read()
         data4 = pytesseract.image_to_data(frames)
         for z, a in enumerate(data4.splitlines()):
             # Counter
@@ -197,7 +198,7 @@ def startvideofeed():
 
 def startimagefeed():
     # Video feed
-    video = cv2.VideoCapture("https://10.4.183.8:8080/video")
+    video = cv2.VideoCapture("http://172.20.10.11/")
 
     # Setting width and height for video feed
     video.set(3, 640)

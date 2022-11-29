@@ -9,40 +9,39 @@ from playsound import playsound
 pytesseract.pytesseract.tesseract_cmd = 'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
 
 # # connecting live video stream
-# video = cv2.VideoCapture("http:172.20.10.11/8080/video")
+# video = cv2.VideoCapture("rtsp://172.20.10.11/1"
+# video = cv2.VideoCapture(1)
+#
 #
 # # Setting width and height for video feed
 # video.set(3, 640)
-# video.set(4, 480)
+# video.set(4, 500)
 #
 # # Allows continuous frames
 # while True:
 #     # Capture each frame from the video feed
-#     extra, frames = video.read()
-#     data4 = pytesseract.image_to_data(frames)
-#     for z, a in enumerate(data4.splitlines()):
+#     ret, frame = video.read()
+#     data = pytesseract.image_to_data(frame)
+#     for z, a in enumerate(data.splitlines()):
 #         # Counter
 #         if z != 0:
 #             # Converts 'data1' string into a list stored in 'a'
 #             a = a.split()
 #             # Checking if array contains a word
-#             if len(a) == 12:
+#             if len(a) >= 12:
 #                 # Storing values in the right variables
 #                 x, y = int(a[6]), int(a[7])
 #                 w, h = int(a[8]), int(a[9])
 #                 # Display bounding box of each word
-#                 cv2.rectangle(frames, (x, y), (x + w, y + h), (0, 0, 255), 2)
+#                 cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 0, 255), 2)
 #                 # Display detected word under each bounding box
-#                 cv2.putText(frames, a[11], (x - 15, y), cv2.FONT_HERSHEY_PLAIN, 2, (0, 0, 255), 1)
+#                 cv2.putText(frame, a[11], (x + 15, y), cv2.FONT_HERSHEY_PLAIN, 2, (0, 0, 255), 1)
 # # Output the bounding box with the image
-#     cv2.imshow('Video output', frames)
+#     cv2.imshow('Video output', frame)
 #     if cv2.waitKey(1) & 0xFF == ord('q'):
 #         video.release()
 #         cv2.destroyAllWindows()
 #         break
-
-
-
 
 # Image feeds
 img1 = cv2.imread('Capture_1.JPG')
