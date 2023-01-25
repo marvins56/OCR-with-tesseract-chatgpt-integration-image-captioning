@@ -39,7 +39,7 @@ def takecommand():  # function to take an audio input from the user
         audio = r.listen(source)
 
     try:  # error handling
-        speak('A moment ...')
+        speak('A moment, please...')
         query = r.recognize_google(audio, language='en-in')
         # using google for voice recognition
         print(f'User said: {query}\n')
@@ -62,16 +62,19 @@ def sendemail(to, content):  # function to send email
 if __name__ == '__main__':  # execution control
     wishme()
     while True:
-        query = takecommand().lower()  # converts user asked query into lower case
+        query = takecommand().lower()
+
+        # converts user asked query into lower case
 
         # The whole logic for execution of tasks based on user asked query
 
-        if 'wikipedia' in query:
-            speak('Searching Wikipedia....')
-            query = query.replace('wikipedia', '')
-            results = wikipedia.summary(query, sentences=5)
-            print(results)
-            speak(results)
+        if 'ww,ds' in query:
+            speak("Initialising camera")
+            # speak('Searching Wikipedia....')
+            # query = query.replace('wikipedia', '')
+            # results = wikipedia.summary(query, sentences=5)
+            # print(results)
+            # speak(results)
 
         elif 'open youtube' in query:
             webbrowser.open('youtube.com')
@@ -89,7 +92,6 @@ if __name__ == '__main__':  # execution control
         elif 'time' in query:
             strtime = datetime.datetime.now().strftime('%H:%M:%S')
             speak(f'Sir the time is {strtime}')
-
 
         elif 'open stack overflow' in query:
             webbrowser.open('stackoverflow.com')
@@ -115,4 +117,24 @@ if __name__ == '__main__':  # execution control
         elif 'exit' in query:
             speak('okay boss, please call me when you need me')
             quit()
+
+
+        elif 'help' in query:
+            speak("""
+            You can use these commands and I'll help you out:
+
+            1. Open reddit subreddit : Opens the subreddit in default browser.
+            2. Open xyz.com : replace xyz with any website name
+            3. Send email/email : Follow up questions such as recipient name, content will be asked in order.
+            4. Tell a joke/another joke : Says a random dad joke.
+            5. Current weather in {cityname} : Tells you the current condition and temperture
+            7. Greetings
+            8. play me a video : Plays song in your VLC media player
+            9. change wallpaper : Change desktop wallpaper
+            10. news for today : reads top news of today
+            11. time : Current system time
+            12. top stories from google news (RSS feeds)
+            13. tell me about xyz : tells you about xyz
+            """)
+
 
