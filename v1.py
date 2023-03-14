@@ -6,7 +6,7 @@ import webbrowser  # required to open the prompted application in web browser
 import os.path  # required to fetch the contents from the specified folder/directory
 import smtplib  # required to work with queries regarding e-mail
 import openai
-
+from ReusableLibraries import  capture_image
 engine = pyttsx3.init(
     'sapi5')  # sapi5 is an API and the technology for voice recognition and synthesis provided by Microsoft
 voices = engine.getProperty('voices')  # gets you the details of the current voices
