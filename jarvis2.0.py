@@ -47,12 +47,11 @@ def output(out):
 
 user = "marvin"
 assistant = "Jarvis"
-engine = pyttsx3.init()
+engine = pyttsx3.init();
 voices = engine.getProperty("voices")
 engine.setProperty("voice", voices[0].id)  # Microsoft David aka male
 # engine.setProperty("voice",voices[1].id) Microsoft zira aka female
 output(f"Hello this is {assistant}")
-
 
 def greet():
     hour = datetime.datetime.now().hour
@@ -65,47 +64,6 @@ def greet():
     output("How may i Assist you?")
 
 
-def sendEmail():
-    email_list = {
-        "test": "rokano2321@to200.com"
-    }
-    try:
-        email = EmailMessage()
-        output("To whom you want to send the e-mail")
-        name = inputCommand().lower()
-        email["To"] = email_list[name]
-        output("What is the subject of your e-mail")
-        email["Subject"] = inputCommand()
-        email["From"] = senderemail
-        output("What should i Say?")
-        email.set_content(inputCommand())
-        s = smtplib.SMTP("smtp.gmail.com", 587)
-        s.starttls()
-        s.login(senderemail, password)
-        s.send_message(email)
-        s.close()
-        output("Email has Sent")
-    except Exception as e:
-        print(e)
-        output("Unable to send the Email")
-
-
-def sendWhatMsg():
-    user_list = {
-        "test1": "+91 95299 16394"
-    }
-    try:
-        output("To whom you want to send the message")
-        name = inputCommand().lower()
-        output("What is the message")
-        we.open("https://web.whatsapp.com/send?phone=" +
-                user_list[name]+"&text="+inputCommand())
-        sleep(6)
-        pyautogui.press("enter")
-        output("Message sent")
-    except Exception as e:
-        print(e)
-        output("Unable to send the Message")
 
 
 def weather():
@@ -129,12 +87,6 @@ def news():
         output(y["description"])
 
 
-def idea():
-    output("What is your idea?")
-    data = inputCommand().title()
-    output("You said me to remember this Idea: " + data)
-    with open("data.txt", "a", encoding="Utf-8") as r:
-        print(data, file=r)
 
 
 greet()

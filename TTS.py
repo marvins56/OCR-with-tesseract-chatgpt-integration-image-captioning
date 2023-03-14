@@ -7,7 +7,7 @@ from playsound import playsound
 # Connects pytesseract(wrapper) to the trained tesseract module
 pytesseract.pytesseract.tesseract_cmd = 'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
 
-# # Video feed
+# # # Video feed
 # video = cv2.VideoCapture(0)
 #
 # # Setting width and height for video feed
@@ -161,10 +161,8 @@ def wordthree():
 
 
 def startvideofeed():
-    # Video feed
-    video = cv2.VideoCapture("rtsp://172.20.10.11")
-
-
+    # Video feed7
+    video = cv2.VideoCapture(0)
     # Setting width and height for video feed
     video.set(3, 640)
     video.set(4, 480)
