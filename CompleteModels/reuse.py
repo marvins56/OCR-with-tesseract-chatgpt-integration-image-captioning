@@ -1,7 +1,10 @@
+import openai
 import pyttsx3
 import datetime
 import cv2
 import pytesseract
+
+import speech_recognition as sr
 
 import datetime  # required to resolve any query regarding date and time
 import speech_recognition as sr  # required to return a string output by taking microphone input from the user
@@ -13,6 +16,9 @@ import smtplib  # required to work with queries regarding e-mail
 import os
 # Connects pytesseract(wrapper) to the trained tesseract module
 pytesseract.pytesseract.tesseract_cmd = 'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
+openai.api_key = "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"
+
+
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
 rate = engine.getProperty('rate')
@@ -42,7 +48,8 @@ def wishMe():
 
 
 def capture_image():
-    speak("press button to capture image")
+    speak("note : you will be asked to retake the image incase the image is not clear.")
+    speak("press button to capture image in , 1 , 2 , 3. ")
     # Initialize camera
     cap = cv2.VideoCapture(0)
 
@@ -70,3 +77,45 @@ def capture_image():
             cv2.destroyAllWindows()
 
             return filepath
+
+def speech_to_text():
+    # Initialize speech recognizer
+    r = sr.Recognizer()
+
+    # Use default system microphone as source to listen to speech
+    with sr.Microphone() as source:
+        speak("Hello, How many i help you?")
+        # Adjust for ambient noise
+        r.adjust_for_ambient_noise(source)
+        # Record the user's speech
+        audio = r.listen(source)
+
+    try:
+        # Use Google speech recognition to convert speech to text
+        text = r.recognize_google(audio)
+        speak(f"You said: {text}")
+        speak("Alright!. Noted.")
+        return text
+
+    except sr.UnknownValueError:
+        speak("Sorry, could not understand your speech.")
+    except sr.RequestError:
+        speak("Sorry, there was an error with the speech recognition service.")
+
+
+def generate_response(prompt):
+    # Generate response from OpenAI API
+    response = openai.Completion.create(
+        engine='text-davinci-003',
+        prompt=prompt,
+        temperature=0,
+        max_tokens=400,
+        top_p=1,
+        frequency_penalty=0,
+        presence_penalty=0,
+        stop=None
+    )
+
+    # Extract the response text
+    message = response.choices[0].text.strip()
+    return message
