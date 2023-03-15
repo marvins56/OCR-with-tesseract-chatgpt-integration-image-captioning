@@ -76,8 +76,8 @@ def process_image(image_path):
     speak("File saved successfully.")
 
 
-    # Output the bounding box with the image
-    # cv2.imshow('Image output', img)
+    # # Output the bounding box with the image
+    # cv2.imshow('Image output', image_path)
     # cv2.waitKey(0)
 
 

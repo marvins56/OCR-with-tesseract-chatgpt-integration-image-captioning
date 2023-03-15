@@ -1,11 +1,17 @@
-# import os
-import pyttsx3  # converts text to speech
 import openai
-from CompleteModels.reuse import speak
-# get API key from top-right dropdown on OpenAI website
-openai.api_key = "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"
+import speech_recognition as sr
+import pyttsx3
+from CompleteModels.reuse import *
 
-def complete(prompt):
+# Initialize OpenAI API
+openai.api_key =  "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"
+
+# Initialize speech recognition and text-to-speech engines
+r = sr.Recognizer()
+engine = pyttsx3.init()
+
+# function to process text
+def get_feedback_from_chat_gpt(prompt):
     # query text-davinci-003
     res = openai.Completion.create(
         engine='text-davinci-003',
@@ -18,13 +24,37 @@ def complete(prompt):
         stop=None
     )
 
-    return speak(res['choices'][0]['text'].strip())
+    # Convert feedback text to speech using text-to-speech engine
+    feedback = res['choices'][0]['text'].strip()
+    speak(feedback)
 
-speak("processing query")
-query = (
-    "how to create a luganda chatbot"
-)
 
-complete(query)
+# Keyword to stop the conversation
+stop_keyword = "stop"
+back_keyword = "menu"
+
+while True:
+    wishMe()
+    # Prompt user for input using text-to-speech
+
+    # Use speech recognition to convert user's speech to text
+    speech_to_text()
+    text_generated = speech_to_text();
+    # Convert user input to lowercase for easier keyword matching
+    user_input = text_generated.lower()
+
+    # Check if user input contains the stop keyword
+    if stop_keyword in user_input:
+        speak(" STOP keyword detected")
+        speak("stopping system")
+        break
+    elif back_keyword in user_input:
+        speak(" menu keyword detected")
+
+
+    # Get feedback from OpenAI GPT API
+    speak("processing input,..... Kindly hold on..")
+    get_feedback_from_chat_gpt(user_input)
+    speak("processing complete .")
 
 

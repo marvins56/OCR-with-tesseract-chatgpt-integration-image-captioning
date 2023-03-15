@@ -84,7 +84,7 @@ def speech_to_text():
 
     # Use default system microphone as source to listen to speech
     with sr.Microphone() as source:
-        speak("Hello, How many i help you?")
+        speak("hello, welcome to your chat assistant. How may i help you?")
         # Adjust for ambient noise
         r.adjust_for_ambient_noise(source)
         # Record the user's speech
@@ -98,9 +98,12 @@ def speech_to_text():
         return text
 
     except sr.UnknownValueError:
-        speak("Sorry, could not understand your speech.")
+        speak("Sorry, could not understand your input.")
     except sr.RequestError:
         speak("Sorry, there was an error with the speech recognition service.")
+
+        # Return empty string on error
+        return ""
 
 
 def generate_response(prompt):
