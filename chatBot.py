@@ -2,9 +2,8 @@ import openai
 import speech_recognition as sr
 import pyttsx3
 from CompleteModels.reuse import *
-
 # Initialize OpenAI API
-openai.api_key =  "place api key here"
+openai.api_key = "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"
 
 # Initialize speech recognition and text-to-speech engines
 r = sr.Recognizer()
@@ -39,7 +38,7 @@ while True:
 
     # Use speech recognition to convert user's speech to text
     speech_to_text()
-    text_generated = speech_to_text();
+    text_generated = speech_to_text()
     # Convert user input to lowercase for easier keyword matching
     user_input = text_generated.lower()
 

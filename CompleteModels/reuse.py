@@ -76,7 +76,6 @@ def capture_image():
             # Release camera and close window
             cap.release()
             cv2.destroyAllWindows()
-
             return filepath
 
 def speech_to_text():
@@ -85,7 +84,7 @@ def speech_to_text():
 
     # Use default system microphone as source to listen to speech
     with sr.Microphone() as source:
-        speak("hello, welcome to your chat assistant. How may i help you?")
+        speak("hello, welcome.... How may i be of service....")
         # Adjust for ambient noise
         r.adjust_for_ambient_noise(source)
         # Record the user's speech
@@ -95,7 +94,7 @@ def speech_to_text():
         # Use Google speech recognition to convert speech to text
         text = r.recognize_google(audio)
         speak(f"You said: {text}")
-        speak("Alright!. Noted.")
+        speak("Noted.")
         return text
 
     except sr.UnknownValueError:

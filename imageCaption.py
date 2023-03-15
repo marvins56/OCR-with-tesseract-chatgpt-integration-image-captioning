@@ -1,6 +1,6 @@
 
 
-from CompleteModels.reuse import speak
+from CompleteModels.reuse import speak, capture_image
 from model import get_caption_model, generate_caption
 import os
 
@@ -26,5 +26,8 @@ def CaptionImage(image_path):
         speak("Error: could not find the vocabulary file.")
 
 
-image_path = 'testimages/96420612_feb18fc6c6.jpg'
-CaptionImage(image_path)
+capture_image()
+
+path = capture_image()
+
+CaptionImage(path)

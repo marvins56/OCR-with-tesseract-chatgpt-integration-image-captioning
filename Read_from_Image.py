@@ -3,10 +3,13 @@ import cv2
 import pytesseract
 import datetime  # required to resolve any query regarding date and time
 import os.path  # required to fetch the contents from the specified folder/directory
-from CompleteModels.reuse import capture_image, speak, engine
+
 import os
 # Connects pytesseract(wrapper) to the trained tesseract module
+from CompleteModels.reuse import *
+
 pytesseract.pytesseract.tesseract_cmd = 'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
+
 
 def process_image(image_path):
     # Read image file
@@ -17,6 +20,7 @@ def process_image(image_path):
 
     # Initialize variables
     string = ''
+
     speak("Image selected...., processing image")
 
     # Create directory to store files
@@ -70,6 +74,18 @@ def process_image(image_path):
     # # Output the bounding box with the image
     # cv2.imshow('Image output', image_path)
     # cv2.waitKey(0)
+
+
+
+capture_image()
+
+path = capture_image()
+if path and os.path.exists(path):
+    # process the image using the process_image() function
+    process_image(path)
+else:
+    speak("Error: Could not capture image or path is invalid.")
+
 
 
 
