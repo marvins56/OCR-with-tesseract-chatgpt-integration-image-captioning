@@ -62,3 +62,105 @@ def listen_for_commands():
 
 # Start listening for voice commands
 listen_for_commands()
+
+
+#
+# #
+# import speech_recognition as sr
+# import pyttsx3
+#
+# # Initialize text-to-speech engine
+# engine = pyttsx3.init()
+#
+# # Initialize speech recognizer
+# r = sr.Recognizer()
+#
+# # Keyword to wake up the system
+# wake_keyword = "hey system"
+#
+#
+# # Define your functions here
+#
+# def read():
+#     # Function logic here
+#     pass
+#
+#
+# def describe():
+#     # Function logic here
+#     pass
+#
+#
+# def send_sms():
+#     # Function logic here
+#     pass
+#
+#
+# def call():
+#     # Function logic here
+#     pass
+#
+#
+# def help_call():
+#     # Function logic here
+#     pass
+#
+#
+# # Define a function to execute the selected function
+# def execute_function(selected_function):
+#     # Call the selected function
+#     selected_function()
+#
+#     # Prompt the user to continue or exit
+#     engine.say("Do you want to perform another task?")
+#     engine.runAndWait()
+#
+#
+# # Define a function to display the menu
+# def display_menu():
+#     engine.say("Which task do you want to perform?")
+#     engine.say("You can say: read, describe, send sms, call, or help call.")
+#     engine.runAndWait()
+#
+#
+# # Run the script in a loop
+# while True:
+#     try:
+#         # Prompt the user to select a function
+#         display_menu()
+#
+#         # Listen to user input
+#         with sr.Microphone() as source:
+#             r.adjust_for_ambient_noise(source)
+#             audio = r.listen(source)
+#
+#         # Use Google speech recognition to convert speech to text
+#         text = r.recognize_google(audio)
+#
+#         # Process user input
+#         if wake_keyword in text.lower():
+#             # User has woken up the system
+#             display_menu()
+#         elif "read" in text.lower():
+#             execute_function(read)
+#         elif "describe" in text.lower():
+#             execute_function(describe)
+#         elif "send sms" in text.lower():
+#             execute_function(send_sms)
+#         elif "call" in text.lower():
+#             execute_function(call)
+#         elif "help call" in text.lower():
+#             execute_function(help_call)
+#         else:
+#             engine.say("Sorry, I didn't understand your request. Please try again.")
+#             engine.runAndWait()
+#
+#     except sr.UnknownValueError:
+#         # Speech recognition could not understand the user
+#         engine.say("Sorry, I didn't catch that. Please try again.")
+#         engine.runAndWait()
+#
+#     except sr.RequestError:
+#         # Speech recognition service failed
+#         engine.say("Sorry, there was an error with the speech recognition service.")
+#         engine.runAndWait()

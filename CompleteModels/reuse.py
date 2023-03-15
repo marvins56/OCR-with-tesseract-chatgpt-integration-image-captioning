@@ -12,8 +12,9 @@ import wikipedia  # required to resolve any query regarding wikipedia
 import webbrowser  # required to open the prompted application in web browser
 import os.path  # required to fetch the contents from the specified folder/directory
 import smtplib  # required to work with queries regarding e-mail
-
+from model import get_caption_model, generate_caption
 import os
+
 # Connects pytesseract(wrapper) to the trained tesseract module
 pytesseract.pytesseract.tesseract_cmd = 'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
 openai.api_key = "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"
@@ -122,3 +123,25 @@ def generate_response(prompt):
     # Extract the response text
     message = response.choices[0].text.strip()
     return message
+
+
+
+def CaptionImage(image_path):
+    try:
+        speak("Generating caption.....")
+        caption_model = get_caption_model()
+        captions = []
+        pred_caption = generate_caption(image_path, caption_model)
+
+        captions.append(pred_caption)
+        speak("Generation complete ..")
+        for _ in range(4):
+            pred_caption = generate_caption(image_path, caption_model, add_noise=True)
+            if pred_caption not in captions:
+                captions.append(pred_caption)
+
+        speak("Processing complete. The generated captions are:")
+        for c in captions:
+            speak(c)
+    except FileNotFoundError:
+        speak("Error: could not find the vocabulary file.")
