@@ -4,7 +4,7 @@ import pyttsx3
 from CompleteModels.reuse import *
 
 # Initialize OpenAI API
-openai.api_key =  "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"
+openai.api_key =  "place api key here"
 
 # Initialize speech recognition and text-to-speech engines
 r = sr.Recognizer()
