@@ -2,8 +2,9 @@ import openai
 import speech_recognition as sr
 import pyttsx3
 from CompleteModels.reuse import *
+
 # Initialize OpenAI API
-openai.api_key = "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"
+openai.api_key = "PLACE API HERE"
 
 # Initialize speech recognition and text-to-speech engines
 r = sr.Recognizer()
@@ -25,35 +26,41 @@ def get_feedback_from_chat_gpt(prompt):
 
     # Convert feedback text to speech using text-to-speech engine
     feedback = res['choices'][0]['text'].strip()
+    # SAVE FEEDBACK
+    save_and_speak_feedback(prompt, feedback)
+
+
+def save_and_speak_feedback(prompt, feedback):
+    # save conversation to file
+    folder_name = "conversations"
+    date_now = datetime.datetime.now().strftime('%Y-%m-%d')
+    file_name = f"{date_now}.txt"
+
+    # check if folder exists, create it if not
+    if not os.path.exists(folder_name):
+        os.makedirs(folder_name)
+
+    # open file, append conversation with timestamp
+    with open(os.path.join(folder_name, file_name), 'a') as f:
+        timestamp = datetime.datetime.now().strftime('%H:%M:%S')
+        f.write(timestamp + " User: " + prompt + "\n")
+        f.write(timestamp + " AI: " + feedback + "\n")
+
+    # speak feedback
+    speak("preparing  results....")
     speak(feedback)
-
-
-# Keyword to stop the conversation
-stop_keyword = "stop"
-back_keyword = "menu"
 
 while True:
     wishMe()
     # Prompt user for input using text-to-speech
 
     # Use speech recognition to convert user's speech to text
-    speech_to_text()
+    # speech_to_text()
     text_generated = speech_to_text()
     # Convert user input to lowercase for easier keyword matching
     user_input = text_generated.lower()
-
-    # Check if user input contains the stop keyword
-    if stop_keyword in user_input:
-        speak(" STOP keyword detected")
-        speak("stopping system")
-        break
-    elif back_keyword in user_input:
-        speak(" menu keyword detected")
-
 
     # Get feedback from OpenAI GPT API
     speak("processing input,..... Kindly hold on..")
     get_feedback_from_chat_gpt(user_input)
     speak("processing complete .")
-
-

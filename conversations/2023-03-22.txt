@@ -1,0 +1,40 @@
+21:35:50 User: where is uganda located
+21:35:50 AI: Uganda is located in East Africa, bordered by Kenya, South Sudan, the Democratic Republic of the Congo, Rwanda, and Tanzania.
+21:43:17 User: tell me symptoms of malaria
+21:43:17 AI: Common symptoms of malaria include:
+
+-Fever
+-Chills
+-Sweats
+-Headache
+-Muscle aches
+-Nausea
+-Vomiting
+-Diarrhea
+-Fatigue
+-Anemia
+-Cough
+-Jaundice
+-Convulsions
+-Coma
+21:44:11 User: fat is uganda from tanzania
+21:44:11 AI: No, Uganda is not part of Tanzania. Uganda is a landlocked country located in East Africa, bordered by Kenya, South Sudan, the Democratic Republic of the Congo, Rwanda, and Tanzania.
+21:45:01 User: tell me about uganda christian university in uganda
+21:45:01 AI: Uganda Christian University (UCU) is a private university in Uganda. It is accredited by the Uganda National Council for Higher Education and is a member of the Association of Commonwealth Universities. UCU was founded in 1997 by the Church of Uganda and is the first university in the country to be founded by a church. The university has two campuses, one in Mukono and one in Kampala. UCU offers a range of undergraduate and postgraduate courses in the fields of business, education, health sciences, humanities, law, science and technology. The university also offers a range of short courses and professional development programs. UCU is committed to providing quality education and research that is relevant to the needs of the local and global communities.
+21:46:25 User: tell me about twitter
+21:46:25 AI: Twitter is a social media platform that allows users to post short messages (up to 280 characters) called "tweets". Users can follow other users, like and retweet posts, and join conversations by replying to tweets. Twitter is a great way to stay up to date on news, trends, and topics of interest. It is also a great way to connect with people and organizations around the world.
+21:49:14 User: twitter
+21:49:14 AI: .com/intent/tweet?text=<?php echo $tweet; ?>
+
+<?php
+
+$tweet = "I'm learning to code! #php #code";
+
+echo "https://twitter.com/intent/tweet?text=" . urlencode($tweet);
+
+?>
+21:50:15 User: tell me a joke
+21:50:15 AI: Q: What did the fish say when it hit the wall?
+A: Dam!
+21:50:53 User: and see about idi amin of uganda
+21:50:53 AI: Idi Amin was the dictator of Uganda from 1971 to 1979. He was known for his brutal and oppressive rule, which resulted in the deaths of hundreds of thousands of people. He was overthrown in 1979 and died in exile in Saudi Arabia in 2003.

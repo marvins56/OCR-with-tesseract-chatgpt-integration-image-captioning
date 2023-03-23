@@ -8,7 +8,7 @@ import speech_recognition as sr
 
 import datetime  # required to resolve any query regarding date and time
 import speech_recognition as sr  # required to return a string output by taking microphone input from the user
-import wikipedia  # required to resolve any query regarding wikipedia
+# import wikipedia  # required to resolve any query regarding wikipedia
 import webbrowser  # required to open the prompted application in web browser
 import os.path  # required to fetch the contents from the specified folder/directory
 import smtplib  # required to work with queries regarding e-mail
@@ -16,7 +16,7 @@ from model import get_caption_model, generate_caption
 import os
 
 # Connects pytesseract(wrapper) to the trained tesseract module
-pytesseract.pytesseract.tesseract_cmd = 'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
+pytesseract.pytesseract.tesseract_cmd = 'C:\\Program Files (x86)\\Tesseract-OCR'
 openai.api_key = "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"
 
 
@@ -34,7 +34,6 @@ def speak(audio):
     engine.say(audio)
     engine.runAndWait()
 
-
 def wishMe():
     hour = int(datetime.datetime.now().hour)
     # hour = datetime.datetime.now().hour
@@ -45,7 +44,7 @@ def wishMe():
     elif(hour >= 18) and (hour < 21):
         speak(f"Good Evening ")
 
-        speak("How may i Assist you?")
+
 
 
 def capture_image():
