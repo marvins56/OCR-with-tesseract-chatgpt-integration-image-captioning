@@ -1,10 +1,12 @@
 import openai
 import speech_recognition as sr
 import pyttsx3
+
+import apiKey
 from CompleteModels.reuse import *
 
 # Initialize OpenAI API
-openai.api_key = "PLACE API HERE"
+openai.api_key = apiKey
 
 # Initialize speech recognition and text-to-speech engines
 r = sr.Recognizer()
