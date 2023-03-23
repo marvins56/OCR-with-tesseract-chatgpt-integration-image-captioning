@@ -3,7 +3,7 @@ import speech_recognition as sr
 import pyttsx3
 import secrets
 
-import apiKey
+import api_Key
 from CompleteModels.reuse import *
 
 # Initialize OpenAI API
