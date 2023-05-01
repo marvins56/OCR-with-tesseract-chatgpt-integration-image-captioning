@@ -1,5 +1,5 @@
 import openai
-import pyttsx3
+
 import datetime
 import cv2
 import pytesseract
@@ -8,6 +8,7 @@ import speech_recognition as sr
 
 import datetime  # required to resolve any query regarding date and time
 import speech_recognition as sr  # required to return a string output by taking microphone input from the user
+import pyttsx3
 # import wikipedia  # required to resolve any query regarding wikipedia
 import webbrowser  # required to open the prompted application in web browser
 import os.path  # required to fetch the contents from the specified folder/directory
@@ -16,8 +17,9 @@ from model import get_caption_model, generate_caption
 import os
 
 # Connects pytesseract(wrapper) to the trained tesseract module
-pytesseract.pytesseract.tesseract_cmd = 'C:\\Program Files (x86)\\Tesseract-OCR'
-openai.api_key = "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"
+pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files (x86)\Tesseract-OCR'
+# pytesseract.pytesseract.tesseract_cmd = 'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
+openai.api_key = "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"
 
 
 engine = pyttsx3.init('sapi5')
@@ -27,8 +29,6 @@ engine.setProperty('rate', rate - 50)  # Decrease the rate by 50
 
 # print(voices[1].id)
 engine.setProperty('voice', voices[0].id)
-
-
 
 def speak(audio):
     engine.say(audio)
@@ -43,10 +43,6 @@ def wishMe():
         speak(f"Good afternoon ")
     elif(hour >= 18) and (hour < 21):
         speak(f"Good Evening ")
-
-
-
-
 def capture_image():
     speak("note : you will be asked to retake the image incase the image is not clear.")
     speak("press button to capture image in , 1 , 2 , 3. ")
@@ -57,21 +53,17 @@ def capture_image():
     while True:
         ret, frame = cap.read()
         cv2.imshow('Press Space to Capture Image', frame)
-
         if cv2.waitKey(1) & 0xFF == ord(' '):
             # Get current date and time
             now = datetime.datetime.now()
             filename = now.strftime("%Y-%m-%d_%H-%M-%S")
-
             # Create directory if it does not exist
             directory = './images/'
             if not os.path.exists(directory):
                 os.makedirs(directory)
-
             # Save image
             filepath = os.path.join(directory, f"{filename}.png")
             cv2.imwrite(filepath, frame)
-
             # Release camera and close window
             cap.release()
             cv2.destroyAllWindows()
@@ -80,7 +72,6 @@ def capture_image():
 def speech_to_text():
     # Initialize speech recognizer
     r = sr.Recognizer()
-
     # Use default system microphone as source to listen to speech
     with sr.Microphone() as source:
         speak("hello, welcome.... How may i be of service....")
@@ -88,7 +79,6 @@ def speech_to_text():
         r.adjust_for_ambient_noise(source)
         # Record the user's speech
         audio = r.listen(source)
-
     try:
         # Use Google speech recognition to convert speech to text
         text = r.recognize_google(audio)
@@ -121,7 +111,6 @@ def generate_response(prompt):
     # Extract the response text
     message = response.choices[0].text.strip()
     return message
-
 
 
 def CaptionImage(image_path):

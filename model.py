@@ -332,7 +332,6 @@ import pickle
 import tensorflow as tf
 import pandas as pd
 import numpy as np
-
 # CONTANTS
 MAX_LENGTH = 40
 # VOCABULARY_SIZE = 10000
@@ -340,7 +339,6 @@ BATCH_SIZE = 32
 BUFFER_SIZE = 1000
 EMBEDDING_DIM = 512
 UNITS = 512
-
 # LOADING DATA
 vocab = pickle.load(open('saved_vocabulary/vocab_coco.file', 'rb'))
 
@@ -516,14 +514,12 @@ class ImageCaptioningModel(tf.keras.Model):
         mask = tf.cast(mask, dtype=loss.dtype)
         loss *= mask
         return tf.reduce_sum(loss) / tf.reduce_sum(mask)
-
     def calculate_accuracy(self, y_true, y_pred, mask):
         accuracy = tf.equal(y_true, tf.argmax(y_pred, axis=2))
         accuracy = tf.math.logical_and(mask, accuracy)
         accuracy = tf.cast(accuracy, dtype=tf.float32)
         mask = tf.cast(mask, dtype=tf.float32)
         return tf.reduce_sum(accuracy) / tf.reduce_sum(mask)
-
     def compute_loss_and_acc(self, img_embed, captions, training=True):
         encoder_output = self.encoder(img_embed, training=True)
         y_input = captions[:, :-1]
@@ -594,11 +590,9 @@ def generate_caption(img, caption_model, add_noise=False):
         noise = tf.random.normal(img.shape) * 0.1
         img = (img + noise)
         img = (img - tf.reduce_min(img)) / (tf.reduce_max(img) - tf.reduce_min(img))
-
     img = tf.expand_dims(img, axis=0)
     img_embed = caption_model.cnn_model(img)
     img_encoded = caption_model.encoder(img_embed, training=False)
-
     y_inp = '[start]'
     for i in range(MAX_LENGTH - 1):
         tokenized = tokenizer([y_inp])[:, :-1]
@@ -626,15 +620,11 @@ def get_caption_model():
     caption_model = ImageCaptioningModel(
         cnn_model=cnn_model, encoder=encoder, decoder=decoder, image_aug=None,
     )
-
     def call_fn(batch, training):
         return batch
-
     caption_model.call = call_fn
     sample_x, sample_y = tf.random.normal((1, 299, 299, 3)), tf.zeros((1, 40))
-
     caption_model((sample_x, sample_y))
-
     sample_img_embed = caption_model.cnn_model(sample_x)
     sample_enc_out = caption_model.encoder(sample_img_embed, training=False)
     caption_model.decoder(sample_y, sample_enc_out, training=False)

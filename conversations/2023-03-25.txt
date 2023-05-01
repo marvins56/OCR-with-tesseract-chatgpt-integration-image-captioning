@@ -1,0 +1,6 @@
+10:22:32 User: far it's processing
+10:22:32 AI: I'm currently working on updating the chatbot. I'm making sure that it is able to understand and respond to your questions accurately. I'm also making sure that it is able to provide helpful and relevant information.
+10:23:25 User: user so we get this responseare you doing tonight and then send that to chat gpt and it will be updating me on the progress like how  and then store it and then store it today is
+10:23:25 AI: the response that we get from the user so we can store it in a database or
+
+store it in a file or whatever we need to do with it

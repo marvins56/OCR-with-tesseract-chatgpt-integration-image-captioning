@@ -1,24 +1,16 @@
 import os.path  # required to fetch the contents from the specified folder/directory
-
 # Connects pytesseract(wrapper) to the trained tesseract module
 from CompleteModels.reuse import *
-
-pytesseract.pytesseract.tesseract_cmd = 'C:\\Program Files\\Tesseract-OCR'
-
-# pytesseract.pytesseract.tesseract_cmd = 'C:/Program Files (x86)/Tesseract-OCR/tesseract.exe'
-
+pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files (x86)\Tesseract-OCR'
 def process_image(image_path):
     # Read image file
     img = cv2.imread(image_path)
     hImg, wImg, none = img.shape
     box = pytesseract.image_to_boxes(img)
     data = pytesseract.image_to_data(img)
-
     # Initialize variables
     string = ''
-
     speak("Image selected...., processing image")
-
     # Create directory to store files
     now = datetime.datetime.now()
     filename = now.strftime("%Y-%m-%d_%H-%M-%S")
@@ -48,28 +40,22 @@ def process_image(image_path):
                 string += a[11] + " "
                 # Writing to the file
                 filewrite.write(a[11] + " ")
-
     filewrite.close()
-
     # Save the string to a text file
     with open(filedir + '/string.txt', 'w') as file:
         file.write(string)
-
     speak("Image processing complete.. Results are:")
     # Use pyttsx3 to read the text
     speak(string)
-
     speak("There you go, End of result.")
     # Save the audio file
     speak("File saving initialized,")
-
     engine.save_to_file(string, filedir + '/audio.mp3')
     speak("File saved successfully.")
     # # Output the bounding box with the image
     # cv2.imshow('Image output', image_path)
     # cv2.waitKey(0)
 
-capture_image()
 
 path = capture_image()
 if path and os.path.exists(path):

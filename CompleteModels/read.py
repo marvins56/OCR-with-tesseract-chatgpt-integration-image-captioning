@@ -66,7 +66,6 @@ def process_image(image_path):
     engine.save_to_file(string, filedir + '/audio.mp3')
     speak("File saved successfully.")
 
-
     # # Output the bounding box with the image
     # cv2.imshow('Image output', image_path)
     # cv2.waitKey(0)

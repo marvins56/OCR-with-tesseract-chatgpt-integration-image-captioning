@@ -5,7 +5,7 @@
 
 -Fever
 -Chills
--Sweats
+-Sweat
 -Headache
 -Muscle aches
 -Nausea
@@ -17,6 +17,7 @@
 -Jaundice
 -Convulsions
 -Coma
+
 21:44:11 User: fat is uganda from tanzania
 21:44:11 AI: No, Uganda is not part of Tanzania. Uganda is a landlocked country located in East Africa, bordered by Kenya, South Sudan, the Democratic Republic of the Congo, Rwanda, and Tanzania.
 21:45:01 User: tell me about uganda christian university in uganda
